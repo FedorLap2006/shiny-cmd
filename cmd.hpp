@@ -16,6 +16,12 @@ namespace shiny {
                 CMD,
                 ARG
             }type = CMD;
+
+            Node& operator=(const Node& other) {
+                this->value = other.value;
+                this->type = other.type;
+                return *this;
+            }
         };
         std::vector<Node> parseString(std::string str) {
             enum tstate {

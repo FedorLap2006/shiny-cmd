@@ -11,7 +11,7 @@ struct MoveCmd : public shiny::BaseCmd {
 
 int main() {
     std::string strs[] = {
-        "`move test` yasha cam '012.43 232.2214 3422.432'\0" // "" '' ``
+        "`move test` yasha cam '012.43 232.2214 3422.432'", // "" '' ``
         "cmd test 2"
     };
 
