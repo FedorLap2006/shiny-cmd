@@ -17,7 +17,7 @@ namespace shiny {
                 ARG
             }type = CMD;
 
-            Node& operator=(const Node& other) {
+            Node operator=(Node other) {
                 this->value = other.value;
                 this->type = other.type;
                 return *this;
