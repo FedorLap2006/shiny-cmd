@@ -43,7 +43,7 @@ namespace shiny {
                             //std::cout << "waitcmd, is = 0\n";
                             state = INCMD;
                             cur_node.value += *it;
-                            cur_node.type = Node::type::CMD;
+                            cur_node.type = Node::CMD;
                         }
                         break;
                     case WAITARG:
@@ -52,7 +52,7 @@ namespace shiny {
                             //std::cout << "waitarg, is = 0\n";
                             state = INARG;
                             cur_node.value += *it;
-                            cur_node.type = Node::type::ARG;
+                            cur_node.type = Node::ARG;
                         }
                         break;
                     case INCMD:
@@ -62,7 +62,7 @@ namespace shiny {
                             //std::cout << "incmd, is = 0\n";
                             state = INCMD;
                             cur_node.value += *it;
-                            cur_node.type = Node::type::CMD;
+                            cur_node.type = Node::CMD;
 
                             if((*it == '\"' || *it == '\'' || *it == '`') && state2 == INSTR) {
                                 state2 = WAITSTR;
@@ -76,10 +76,10 @@ namespace shiny {
                             //std::cout << "incmd, is = 1\n";
                             state = WAITARG;
                             nodes.push_back(cur_node);
-                            cur_node = {"",Node::type::ARG};
+                            cur_node.value = ""; cur_node.type = Node::ARG;
                         } else if(std::isspace(*it) != 0 && state2 == INSTR) {
                             cur_node.value += *it;
-                            cur_node.type = Node::type::CMD;
+                            cur_node.type = Node::CMD;
                         }
                         break;
                     case INARG:
@@ -88,7 +88,7 @@ namespace shiny {
                             //std::cout << "inarg, is = 0\n";
                             state = INCMD;
                             cur_node.value += *it;
-                            cur_node.type = Node::type::CMD;
+                            cur_node.type = Node::CMD;
                             if((*it == '\"' || *it == '\'' || *it == '`') && state2 == INSTR) {
                                 state2 = WAITSTR;
                                 cur_node.value.erase(0,1);
@@ -101,10 +101,11 @@ namespace shiny {
                             //std::cout << "incmd, is = 1\n";
                             state = WAITARG;
                             nodes.push_back(cur_node);
-                            cur_node = {"",Node::type::ARG};
+                            cur_node.value = "";
+                            cur_node.type = Node::ARG;
                         } else if(std::isspace(*it) != 0 && state2 == INSTR) {
                             cur_node.value += *it;
-                            cur_node.type = Node::type::CMD;
+                            cur_node.type = Node::CMD;
                         }
                         break;
                 }
